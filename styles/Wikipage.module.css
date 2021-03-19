@@ -1,0 +1,62 @@
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 32px;
+}
+
+/*
+Medium uses color #292929
+    font size | line-height | (letter-spacing)
+Full Width: >700px
+  Title: Signifier (serif)
+    48px  60px (-0.5px) 
+  Paragraph: Charter BT (serif)
+    21px  32px (-0.1px)
+  Headings: Söhne (non serif)
+    H2  30px 36px
+    H3  22    28  
+Small screen: <700px
+  Title: 34px  42px
+  Paragraph: 18    28
+  H2: 22    28
+  H3: 20    24
+  
+Paragraphs are 32px (20px small screen) margin-top.
+First paragraph after heading is 12 (10px) margin-top.
+Headings 27 (16px)
+*/
+
+.container h1 {
+  font-size: 48px;
+  margin-top: 27px;
+  margin-bottom: -16px;
+  line-height: 60px;
+}
+
+.container h2 {
+  font-size: 22px;
+  margin-top: 27px;
+  line-height: 28px;
+}
+
+.container h3 {
+  font-size: 20px;
+  margin-top: 27px;
+  line-height: 24px;
+}
+
+.container p {
+  font-size: 18px;
+  margin-top: 32px;
+  line-height: 32px;
+}
+
+.container h2 + p, .container h3 + p {
+  margin-top: 12px;
+}
+
+@media only screen and (max-width: 700px) {
+  .container {
+    padding: 16px;
+  }
+}
