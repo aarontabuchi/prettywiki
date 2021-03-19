@@ -29,7 +29,8 @@ Setting a max-width for articles creates a much better user experience.
 
 ## Project and Technologies
 
-PrettyWiki uses a [Google](google.com){:target="_blank"} styled search page connected to wikipedia's API. It then takes users to a [Medium](medium.com){:target="_blank"} styled article page for easy reading.
+PrettyWiki uses a [Google](google.com){:target="_blank"}
+<a href="http://google.com" target="_blank">external link</a> styled search page connected to wikipedia's API. It then takes users to a [Medium](medium.com){:target="_blank"} styled article page for easy reading.
 
 React is used for fast, reusable compenents.
 Next.js is used for handling the dynamic routing of the search results to their own page.
