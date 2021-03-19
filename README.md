@@ -1,6 +1,7 @@
-# PrettyWiki
+# [PrettyWiki](prettywiki.netlify.app)
 
 Wikipedia, but easy to read!
+### [Live here!](prettywiki.netlify.app)
 
 ## Problem
 
@@ -29,8 +30,8 @@ Setting a max-width for articles creates a much better user experience.
 
 ## Project and Technologies
 
-PrettyWiki uses a [Google](google.com){:target="_blank"}
-<a href="http://google.com" target="_blank">external link</a> styled search page connected to wikipedia's API. It then takes users to a [Medium](medium.com){:target="_blank"} styled article page for easy reading.
+[PrettyWiki](prettywiki.netlify.app) uses a [Google](https://www.google.com) styled search page to fetch [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) search results. Following a search result then takes users to the wiki article, but styled like [Medium](https://www.medium.com)(a popular online publishing platform).
 
-React is used for fast, reusable compenents.
-Next.js is used for handling the dynamic routing of the search results to their own page.
+[React](https://www.reactjs.org) is used for fast, reusable compenents.
+
+[Next.js](https://www.nextjs.org) is used for handling the dynamic routing of the search results to their own page.
