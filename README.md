@@ -1,7 +1,7 @@
-# [PrettyWiki](prettywiki.netlify.app)
+# [PrettyWiki](https://www.prettywiki.netlify.app)
 
 Wikipedia, but easy to read!
-### [Live here!](prettywiki.netlify.app)
+### [Live here!](https://www.prettywiki.netlify.app)
 
 ## Problem
 
@@ -28,9 +28,13 @@ The ideal text length is [reportedly 45 to 75 characters](https://www.smashingma
 
 Setting a max-width for articles creates a much better user experience.
 
+` /* Fun fact: CSS has a 'ch' unit that represents the width of the font's character "0", presumably to solve the above problem. */ `
+
 ## Project and Technologies
 
-[PrettyWiki](prettywiki.netlify.app) uses a [Google](https://www.google.com) styled search page to fetch [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) search results. Following a search result then takes users to the wiki article, but styled like [Medium](https://www.medium.com)(a popular online publishing platform).
+[PrettyWiki](https://www.prettywiki.netlify.app) uses a [Google](https://www.google.com) styled search page to fetch [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) search results.
+
+Following a search result then takes users to the wiki article, but styled like [Medium](https://www.medium.com)(a popular online publishing platform).
 
 [React](https://www.reactjs.org) is used for fast, reusable compenents.
 

@@ -7,16 +7,16 @@ export default function Home() {
     <>
       <Head>
         <title>PrettyWiki - The Pretty Wikipedia</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/PW.ico" />
       </Head>
-      <main>
-        <body className={styles.container}>
+      <body className={styles.container}>
+        <main>
           <div className={styles.centered}>
-            <h1>PrettyWiki</h1>
+            <img src="/logo.svg"></img>
             <Search />
           </div>
-        </body>
-      </main>
+        </main>
+      </body>
     </>
   );
 }
