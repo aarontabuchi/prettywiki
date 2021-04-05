@@ -17,7 +17,9 @@ export default function Search() {
     const searchInput = document.getElementById("searchInput");
 
     function handleKeyUp(e) {
+      // don't trigger a search from arrow keys
       if (e?.code?.includes("Arrow")) return;
+
       const searchInputString = e.target.value;
       if (searchInputString === "") {
         return setAPIresults([]);
@@ -28,6 +30,7 @@ export default function Search() {
         .then((response) => response.json())
         .then((data) => setAPIresults(data));
     }
+
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     return () =>
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
@@ -40,7 +43,8 @@ export default function Search() {
   return (
     <div className={styles.search}>
       <div className={styles.searchContainer}>
-        <form className="border searchBar" onSubmit={handleSubmit}>
+        <form className={styles.searchBar} onSubmit={handleSubmit}>
+          <SearchIcon />
           <label htmlFor="searchInput"></label>
           <input
             type="text"
@@ -49,44 +53,41 @@ export default function Search() {
             autoComplete="off"
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <SearchIcon />
-          <div>
+          {/* <div>
             <input type="submit" id="wikiSearch" value="Wiki Search" />
-          </div>
+          </div> */}
         </form>
       </div>
-      <div className="searchContainer searchResults">
+      <div className={styles.searchResults}>
         <SearchResults results={APIresults} />
       </div>
     </div>
   );
-}
 
-function SearchResults(props) {
-  const results = props?.results[1];
-  let listItems = [];
+  function SearchResults(props) {
+    const results = props?.results[1];
+    let listItems = [];
 
-  for (let i = 0; i < results?.length; i++) {
-    listItems.push(
-      <SearchResult
-        result={props.results[1][i]}
-        key={props.results[1][i]}
-        wiki={props.results[3][i]}
-      ></SearchResult>
-    );
+    for (let i = 0; i < results?.length; i++) {
+      listItems.push(
+        <SearchResult
+          result={props.results[1][i]}
+          key={props.results[1][i]}
+          wiki={props.results[3][i]}
+        ></SearchResult>
+      );
+    }
+    return <ul className={styles.searchResults}>{listItems}</ul>;
   }
-  return <ul className={styles.searchResults}>{listItems}</ul>;
 }
 
 function SearchResult(props) {
-  const result = props.result
+  const result = props.result;
   //const wiki = props.wiki.toString().slice(30);
 
   return (
     <Link href={`/${result}`}>
-      <li className={styles.searchResult}>
-        {result}
-      </li>
+      <li className={styles.searchResult}>{result}</li>
     </Link>
   );
 }

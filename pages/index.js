@@ -9,10 +9,10 @@ export default function Home() {
         <title>PrettyWiki - The Pretty Wikipedia</title>
         <link rel="icon" href="/PW.ico" />
       </Head>
-      <body className={styles.container}>
+      <body className={styles.body}>
         <main>
-          <div className={styles.centered}>
-            <img src="/logo.svg"></img>
+          <div className={styles.main}>
+            <img className={styles.logo} src="/logo.svg"></img>
             <Search />
           </div>
         </main>

@@ -35,7 +35,7 @@ export default function Post() {
       <Head>
         <title>{pid}</title>
       </Head>
-      <body>
+      <body className={styles.main}>
         <header></header>
         <main className={styles.container}>
           <h1>{pid}</h1>
