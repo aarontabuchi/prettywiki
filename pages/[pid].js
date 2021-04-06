@@ -35,16 +35,14 @@ export default function Post() {
       <Head>
         <title>{pid}</title>
       </Head>
-      <body className={styles.main}>
-        <header></header>
-        <main className={styles.container}>
-          <h1>{pid}</h1>
-          <div className={styles.imgWrapper}>
-            <img src={imgSource}></img>
-          </div>
-          <div dangerouslySetInnerHTML={wikiHTML()}></div>
-        </main>
-      </body>
+      <header></header>
+      <main className={styles.container}>
+        <h1>{pid}</h1>
+        <div className={styles.imgWrapper}>
+          <img src={imgSource}></img>
+        </div>
+        <div dangerouslySetInnerHTML={wikiHTML()}></div>
+      </main>
     </>
   );
 }

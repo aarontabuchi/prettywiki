@@ -14,6 +14,13 @@ export default function Search() {
   let listItems = [];
 
   function handleKeyUp(e) {
+    let searchInputString = e.target.value;
+
+    // if search is empty, clear search results and don't fetch
+    if (searchInputString === "") {
+      return setAPIresults([]);
+    }
+
     // search results are 1-10. Input acts as 0
     if (e.code == "ArrowDown") {
       setSelected((prevState) => {
@@ -42,18 +49,9 @@ export default function Search() {
     }
 
     setSelected(0);
-    
-    let searchInputString;
-
     setSearchInput((state) => {
-      searchInputString = state.input;
       return { ...state, typed: searchInputString };
     });
-
-    // if search is empty, clear search results and don't fetch
-    if (searchInputString === "") {
-      return setAPIresults([]);
-    }
 
     const fetchURL = wikiSearchURL + searchInputString;
     fetch(fetchURL)
@@ -131,6 +129,7 @@ export default function Search() {
         <SearchResult
           result={props.results[1][i]}
           key={props.results[1][i]}
+          id={i + 1}
           selected={selected == i + 1 ? true : false}
         ></SearchResult>
       );
@@ -141,9 +140,15 @@ export default function Search() {
   function SearchResult(props) {
     const result = props.result;
 
+    useEffect(() => {
+      const item = document.getElementById(props.id);
+      item.addEventListener("mousemove", () => setSelected(props.id))
+    })
+
     return (
       <Link href={`/${result}`}>
         <li
+          id={props.id}
           className={`${styles.searchResult} ${
             props.selected ? styles.active : ""
           }`}

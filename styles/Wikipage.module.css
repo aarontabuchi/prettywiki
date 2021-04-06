@@ -1,8 +1,5 @@
-.main {
-  color: #292929;
-}
-
 .container {
+  color: #292929;
   max-width: 70ch;
   margin: auto;
   padding: 32px;
