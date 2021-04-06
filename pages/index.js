@@ -9,14 +9,12 @@ export default function Home() {
         <title>PrettyWiki - The Pretty Wikipedia</title>
         <link rel="icon" href="/PW.ico" />
       </Head>
-      <body className={styles.body}>
-        <main>
-          <div className={styles.main}>
-            <img className={styles.logo} src="/logo.svg"></img>
-            <Search />
-          </div>
-        </main>
-      </body>
+      <main>
+        <div className={styles.main}>
+          <img className={styles.logo} src="/logo.svg"></img>
+          <Search />
+        </div>
+      </main>
     </>
   );
 }
