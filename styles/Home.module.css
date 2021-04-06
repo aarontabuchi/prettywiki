@@ -56,18 +56,17 @@
   font-size: 1rem;
 }
 
-.searchResults li:hover {
-  text-decoration: underline;
-  font-style: bold;
-  cursor: pointer;
-}
-
 .searchResult {
   color: red;
 }
 
 .active {
-  color: green;
+  background-color: #eee;
+}
+
+.bold {
+  font-weight: bold;
+  color: black;
 }
 
 @media screen and (min-width: 600px) {

@@ -62,8 +62,9 @@ export default function Search() {
   useEffect(() => {
     console.log(selected, searchInput.input, searchInput.typed);
     if (selected > 0) {
+      const searchString = searchInput.typed;
       setSearchInput((state) => {
-        return { ...state, input: listItems[selected - 1]["props"]["result"] };
+        return { ...state, input: searchString + listItems[selected - 1]["props"]["result"].slice(searchString.length) };
       });
     }
     if (selected == 0) {
@@ -79,26 +80,26 @@ export default function Search() {
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
 
     // prevent up arrow from moving cursor to begining of input
-    // searchInput.addEventListener("keydown", function (e) {
-    //   if (e.key === "ArrowUp") return e.preventDefault();
-    // });
+    searchInput.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowUp") return e.preventDefault();
+    });
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
-      // searchInput.removeEventListener("keydown", function (e) {
-      //   if (e.key === "ArrowUp") return e.preventDefault();
-      // });
+      searchInput.removeEventListener("keydown", function (e) {
+        if (e.key === "ArrowUp") return e.preventDefault();
+      });
     };
   }, []);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
 
   return (
     <div className={styles.search}>
       <div className={styles.searchContainer}>
-        <form className={styles.searchBar} onSubmit={handleSubmit}>
+        <form
+          className={styles.searchBar}
+          action={searchInput.input}
+          method="post"
+        >
           <SearchIcon />
           <label htmlFor="searchInput"></label>
           <input
@@ -110,9 +111,6 @@ export default function Search() {
               setSearchInput({ ...searchInput, input: e.target.value })
             }
           />
-          {/* <div>
-            <input type="submit" id="wikiSearch" value="Wiki Search" />
-          </div> */}
         </form>
       </div>
       <div className={styles.searchResults}>
@@ -139,11 +137,14 @@ export default function Search() {
 
   function SearchResult(props) {
     const result = props.result;
+    const searchString = searchInput.typed;
 
+    // pointer disappears while typing but still triggers mouseover and mouseenter
+    // so that arrow key nav doesn't work, but mousemove solves that
     useEffect(() => {
       const item = document.getElementById(props.id);
-      item.addEventListener("mousemove", () => setSelected(props.id))
-    })
+      item.addEventListener("mousemove", () => setSelected(props.id));
+    });
 
     return (
       <Link href={`/${result}`}>
@@ -153,7 +154,8 @@ export default function Search() {
             props.selected ? styles.active : ""
           }`}
         >
-          {result}
+          {searchString}
+          <span className={styles.bold}>{result.slice(searchString.length)}</span>
         </li>
       </Link>
     );
