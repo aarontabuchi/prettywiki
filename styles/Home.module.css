@@ -60,7 +60,7 @@
   color: red;
 }
 
-.active {
+.searchResult:hover, .active {
   background-color: #eee;
 }
 

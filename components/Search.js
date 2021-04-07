@@ -8,7 +8,6 @@ export default function Search() {
     "https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=";
 
   const [searchInput, setSearchInput] = useState({ input: "", typed: "" });
-  // const [searchInputTyped, setSearchInputTyped] = useState("");
   const [APIresults, setAPIresults] = useState("");
   const [selected, setSelected] = useState(0);
   let listItems = [];
@@ -48,6 +47,7 @@ export default function Search() {
       return;
     }
 
+    // focus back to input if typing
     setSelected(0);
     setSearchInput((state) => {
       return { ...state, typed: searchInputString };
@@ -59,12 +59,22 @@ export default function Search() {
       .then((data) => setAPIresults(data));
   }
 
+  // handles the up/down arrow key changing what should be highlighted and updating the input
+  // to match the highlighted search result
   useEffect(() => {
-    console.log(selected, searchInput.input, searchInput.typed);
+    // console.log(selected, searchInput.input, searchInput.typed);
     if (selected > 0) {
       const searchString = searchInput.typed;
       setSearchInput((state) => {
-        return { ...state, input: searchString + listItems[selected - 1]["props"]["result"].slice(searchString.length) };
+        // wiki uses Title casing. The capitalization of the user needs to be preserved
+        return {
+          ...state,
+          input:
+            searchString +
+            listItems[selected - 1]["props"]["result"].slice(
+              searchString.length
+            ),
+        };
       });
     }
     if (selected == 0) {
@@ -125,37 +135,44 @@ export default function Search() {
     for (let i = 0; i < results?.length; i++) {
       listItems.push(
         <SearchResult
-          result={props.results[1][i]}
-          key={props.results[1][i]}
+          result={results[i]}
+          key={results[i]}
           id={i + 1}
-          selected={selected == i + 1 ? true : false}
         ></SearchResult>
       );
     }
-    return <ul className={styles.searchResults}>{listItems}</ul>;
+
+    return (
+      <ul className={styles.searchResults} id="searchResults">
+        {listItems}
+      </ul>
+    );
   }
 
-  function SearchResult(props) {
-    const result = props.result;
+  function SearchResult({ result, id }) {
     const searchString = searchInput.typed;
+    const [classes, setClasses] = useState(`${styles.searchResult}`);
+
+    useEffect(() => {
+      if (selected == id) {
+        setClasses(`${styles.searchResult} ${styles.active}`);
+      }
+    }, [selected]);
 
     // pointer disappears while typing but still triggers mouseover and mouseenter
     // so that arrow key nav doesn't work, but mousemove solves that
     useEffect(() => {
-      const item = document.getElementById(props.id);
-      item.addEventListener("mousemove", () => setSelected(props.id));
-    });
+      const item = document.getElementById("searchResults");
+      item.addEventListener("mousemove", () => setClasses(styles.searchResult));
+    }, []);
 
     return (
       <Link href={`/${result}`}>
-        <li
-          id={props.id}
-          className={`${styles.searchResult} ${
-            props.selected ? styles.active : ""
-          }`}
-        >
+        <li id={id} className={classes}>
           {searchString}
-          <span className={styles.bold}>{result.slice(searchString.length)}</span>
+          <span className={styles.bold}>
+            {result.slice(searchString.length)}
+          </span>
         </li>
       </Link>
     );
