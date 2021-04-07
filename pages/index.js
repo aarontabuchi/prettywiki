@@ -5,6 +5,7 @@ import Search from "../components/Search.js";
 export default function Home() {
   return (
     <>
+      <html lang="en" />
       <Head>
         <title>PrettyWiki - The Pretty Wikipedia</title>
         <link rel="icon" href="/PW.ico" />

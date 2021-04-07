@@ -1,4 +1,5 @@
 import SearchIcon from "./SearchIcon.js";
+import ClearIcon from "./ClearIcon.js";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
@@ -7,6 +8,8 @@ export default function Search() {
   let wikiSearchURL =
     "https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=";
 
+  // typed input is separate and needs to be remembered, vs auto completed search results
+  // that also gets displayed in the same input element
   const [searchInput, setSearchInput] = useState({ input: "", typed: "" });
   const [APIresults, setAPIresults] = useState("");
   const [selected, setSelected] = useState(0);
@@ -47,7 +50,7 @@ export default function Search() {
       return;
     }
 
-    // focus back to input if typing
+    // reset selected back to input if typing
     setSelected(0);
     setSearchInput((state) => {
       return { ...state, typed: searchInputString };
@@ -121,9 +124,11 @@ export default function Search() {
               setSearchInput({ ...searchInput, input: e.target.value })
             }
           />
+          <ClearSearchButton />
         </form>
       </div>
       <div className={styles.searchResults}>
+        <hr className={styles.hr}></hr>
         <SearchResults results={APIresults} />
       </div>
     </div>
@@ -164,17 +169,52 @@ export default function Search() {
     useEffect(() => {
       const item = document.getElementById("searchResults");
       item.addEventListener("mousemove", () => setClasses(styles.searchResult));
+      return () => {
+        item.removeEventListener("mousemove", () =>
+          setClasses(styles.searchResult)
+        );
+      };
     }, []);
+
+    // function handleOnClick() {
+    //   location.href = `/${result}`
+    // }
 
     return (
       <Link href={`/${result}`}>
-        <li id={id} className={classes}>
-          {searchString}
-          <span className={styles.bold}>
-            {result.slice(searchString.length)}
-          </span>
-        </li>
+        <a>
+          <li id={id} className={classes}>
+            <SearchIcon />
+            <span className={styles.resultString}>
+              {searchString}
+              <span className={styles.bold}>
+                {result.slice(searchString.length)}
+              </span>
+            </span>
+          </li>
+        </a>
       </Link>
+    );
+  }
+
+  function ClearSearchButton() {
+    const [classes, setClasses] = useState(`${styles.clearIcon}`);
+
+    function handleOnClick() {
+      setSearchInput({ input: "", typed: "" });
+      setAPIresults([]);
+    }
+
+    useEffect(() => {
+      if (searchInput.input !== "") {
+        setClasses(`${styles.clearIcon} ${styles.clearIconActive}`);
+      }
+    }, [searchInput]);
+
+    return (
+      <div className={classes} onClick={handleOnClick}>
+        <ClearIcon />
+      </div>
     );
   }
 }
