@@ -23,11 +23,15 @@ Problems with wide text:
 
 Newspapers, magazines, code editors (80 char limit suggestion), etc. use columns with a max-width to prevent these problems.
 
-The ideal text length is [reportedly 45 to 75 characters](https://www.smashingmagazine.com/2014/09/balancing-line-length-font-size-responsive-web-design/){:target="_blank"}.
+The ideal text length is [reportedly 45 to 75 characters](https://www.smashingmagazine.com/2014/09/balancing-line-length-font-size-responsive-web-design/).
 
 Setting a max-width for articles creates a much better user experience.
 
 ` /* Fun fact: CSS has a 'ch' unit that represents the width of the font's character "0", presumably to solve the above problem. */ `
+
+![PrettyWiki demo gif](/public/prettywiki_demo.gif)
+
+### [See it live here!](https://www.prettywiki.netlify.app)
 
 ## Project and Technologies
 
