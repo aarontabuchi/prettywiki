@@ -23,10 +23,16 @@ export default function Search() {
       return setAPIresults([]);
     }
 
+    let listItemsLength;
+    setAPIresults((state) => {
+      listItemsLength = state["1"]?.length;
+      return {...state}
+    })
+
     // search results are 1-10. Input acts as 0
     if (e.code == "ArrowDown") {
       setSelected((prevState) => {
-        if (prevState < 10) return prevState + 1;
+        if (prevState < listItemsLength) return prevState + 1;
         else return 0;
       });
     }
@@ -34,7 +40,7 @@ export default function Search() {
     if (e.code == "ArrowUp") {
       setSelected((prevState) => {
         if (prevState > 0) return prevState - 1;
-        else return 10;
+        else return listItemsLength;
       });
     }
 
@@ -94,6 +100,7 @@ export default function Search() {
 
     // prevent up arrow from moving cursor to begining of input
     searchInput.addEventListener("keydown", function (e) {
+      console.log(e.code)
       if (e.key === "ArrowUp") return e.preventDefault();
     });
 
