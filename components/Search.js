@@ -112,21 +112,16 @@ export default function Search() {
   function handleSumbit(e) {
     e.preventDefault();
     let url = window.location.pathname;
-    const extra = selected == 0 ? searchInput.input : APIresults[1][selected - 1];
+    const extra =
+      selected == 0 ? searchInput.input : APIresults[1][selected - 1];
     url += extra;
-    window.open(url, "_self")
+    window.open(url, "_self");
   }
 
   return (
     <div className={styles.search}>
       <div className={styles.searchContainer}>
-        <form
-          className={styles.searchBar}
-          // action={selected == 0 ? searchInput.input : APIresults[1][selected - 1]}
-          // method="post"
-          // onSubmit={(e) => handleSumbit(e)}
-          onSubmit={handleSumbit}
-        >
+        <form className={styles.searchBar} onSubmit={handleSumbit}>
           <SearchIcon />
           <input
             type="text"

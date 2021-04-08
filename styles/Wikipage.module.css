@@ -89,6 +89,16 @@ Headings 27 (16px)
   margin-top: 12px;
 }
 
+.container ol, .container ul {
+  /* list-style-position: inside; */
+  padding-left: 18px;
+}
+
+.container li {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
 @media only screen and (max-width: 700px) {
   .container {
     padding: 16px;
