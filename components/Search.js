@@ -114,12 +114,13 @@ export default function Search() {
           method="post"
         >
           <SearchIcon />
-          <label htmlFor="searchInput"></label>
+          {/* <label htmlFor="searchInput">Search</label> */}
           <input
             type="text"
             id="searchInput"
             value={searchInput.input}
             autoComplete="off"
+            aria-label="Search"
             onChange={(e) =>
               setSearchInput({ ...searchInput, input: e.target.value })
             }
