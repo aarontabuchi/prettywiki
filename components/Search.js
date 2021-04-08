@@ -23,27 +23,6 @@ export default function Search() {
       return setAPIresults([]);
     }
 
-    let listItemsLength;
-    setAPIresults((state) => {
-      listItemsLength = state["1"]?.length;
-      return {...state}
-    })
-
-    // search results are 1-10. Input acts as 0
-    if (e.code == "ArrowDown") {
-      setSelected((prevState) => {
-        if (prevState < listItemsLength) return prevState + 1;
-        else return 0;
-      });
-    }
-
-    if (e.code == "ArrowUp") {
-      setSelected((prevState) => {
-        if (prevState > 0) return prevState - 1;
-        else return listItemsLength;
-      });
-    }
-
     // Don't update search for non character producing keys. Not sure of the best way to do this
     if (
       e.code.includes("Arrow") ||
@@ -56,16 +35,41 @@ export default function Search() {
       return;
     }
 
-    // reset selected back to input if typing
-    setSelected(0);
     setSearchInput((state) => {
       return { ...state, typed: searchInputString };
     });
+
+    // reset selected back to input if typing
+    setSelected(0);
 
     const fetchURL = wikiSearchURL + searchInputString;
     fetch(fetchURL)
       .then((response) => response.json())
       .then((data) => setAPIresults(data));
+  }
+
+  function handleKeyDown(e) {
+    let listItemsLength;
+    setAPIresults((state) => {
+      listItemsLength = state["1"]?.length;
+      return { ...state };
+    });
+
+    // search results are 1-10. Input acts as 0
+    if (e.code == "ArrowDown") {
+      setSelected((prevState) => {
+        if (prevState < listItemsLength) return prevState + 1;
+        else return 0;
+      });
+    }
+
+    if (e.code == "ArrowUp") {
+      e.preventDefault();
+      setSelected((prevState) => {
+        if (prevState > 0) return prevState - 1;
+        else return listItemsLength;
+      });
+    }
   }
 
   // handles the up/down arrow key changing what should be highlighted and updating the input
@@ -97,18 +101,11 @@ export default function Search() {
     const searchInput = document.getElementById("searchInput");
 
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
-
-    // prevent up arrow from moving cursor to begining of input
-    searchInput.addEventListener("keydown", function (e) {
-      console.log(e.code)
-      if (e.key === "ArrowUp") return e.preventDefault();
-    });
+    searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
-      searchInput.removeEventListener("keydown", function (e) {
-        if (e.key === "ArrowUp") return e.preventDefault();
-      });
+      searchInput.removeEventListener("keydown", (e) => handleKeyDown(e));
     };
   }, []);
 
@@ -121,7 +118,6 @@ export default function Search() {
           method="post"
         >
           <SearchIcon />
-          {/* <label htmlFor="searchInput">Search</label> */}
           <input
             type="text"
             id="searchInput"
@@ -183,10 +179,6 @@ export default function Search() {
         );
       };
     }, []);
-
-    // function handleOnClick() {
-    //   location.href = `/${result}`
-    // }
 
     return (
       <Link href={`/${result}`}>
