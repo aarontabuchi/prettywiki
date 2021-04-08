@@ -34,12 +34,14 @@ export default function Post() {
     <>
       <Head>
         <title>{pid}</title>
+        <link rel="icon" href="/PW.ico" />
+        <meta name="Description" content="Read Wikipedia articles styled attractively"></meta>
       </Head>
       <header></header>
       <main className={styles.container}>
         <h1>{pid}</h1>
         <div className={styles.imgWrapper}>
-          <img src={imgSource}></img>
+          <img src={imgSource} alt="Photo from unsplash"></img>
         </div>
         <div dangerouslySetInnerHTML={wikiHTML()}></div>
       </main>
