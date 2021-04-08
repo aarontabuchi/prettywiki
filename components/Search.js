@@ -114,7 +114,7 @@ export default function Search() {
       <div className={styles.searchContainer}>
         <form
           className={styles.searchBar}
-          action={searchInput.input}
+          action={selected == 0 ? searchInput.input : APIresults[1][selected - 1]}
           method="post"
         >
           <SearchIcon />
