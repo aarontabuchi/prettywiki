@@ -6,6 +6,7 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
+  padding: 8px;
 }
 
 .logo {
@@ -124,5 +125,8 @@
 @media screen and (min-width: 600px) {
   .logo {
     width: 272px;
+    margin: 0 auto;
+    margin-top: clamp(16px, calc(100vh - 480px), 200px);
+    margin-bottom: 18px;
   }
 }
