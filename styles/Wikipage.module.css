@@ -78,7 +78,7 @@ Headings 27 (16px)
 }
 
 .container p {
-  font-size: 18px;
+  font-size: 20px;
   margin-top: 32px;
   line-height: 32px;
   letter-spacing: -0.1px;
@@ -95,8 +95,8 @@ Headings 27 (16px)
 }
 
 .container li {
-  margin-top: 12px;
-  font-size: 18px;
+  margin-top: 16px;
+  font-size: 20px;
 }
 
 @media only screen and (max-width: 700px) {
