@@ -1,8 +1,7 @@
 .container {
   color: #292929;
   max-width: 70ch;
-  margin: auto;
-  padding: 32px;
+  margin: 8px auto;
 }
 
 .container main {
@@ -71,7 +70,7 @@ Headings 27 (16px)
   line-height: 36px;
 }
 
-.container h3 {
+.container h3, .container h4 {
   font-size: 22px;
   margin-top: 27px;
   line-height: 28px;
@@ -85,13 +84,13 @@ Headings 27 (16px)
 }
 
 .container h2 + p,
-.container h3 + p {
+.container h3 + p,
+.container h4 + p {
   margin-top: 12px;
 }
 
 .container ol, .container ul {
-  /* list-style-position: inside; */
-  padding-left: 18px;
+  margin-left: 18px;
 }
 
 .container li {
@@ -101,7 +100,7 @@ Headings 27 (16px)
 
 @media only screen and (max-width: 700px) {
   .container {
-    padding: 16px;
+    margin: 8px;
   }
 
   .container h1 {
@@ -117,7 +116,7 @@ Headings 27 (16px)
     line-height: 28px;
   }
 
-  .container h3 {
+  .container h3, .container h4 {
     font-size: 20px;
     margin-top: 16px;
     line-height: 24px;
@@ -131,7 +130,8 @@ Headings 27 (16px)
   }
 
   .container h2 + p,
-  .container h3 + p {
+  .container h3 + p,
+  .container h4 + p {
     margin-top: 10px;
   }
 }

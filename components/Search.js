@@ -13,7 +13,70 @@ export default function Search() {
   const [searchInput, setSearchInput] = useState({ input: "", typed: "" });
   const [APIresults, setAPIresults] = useState("");
   const [selected, setSelected] = useState(0);
-  let listItems = [];
+  const listItems = [];
+
+  // handles the up/down arrow key changing what should be highlighted and updating the input
+  // to match the highlighted search result
+  useEffect(() => {
+    // console.log(selected, searchInput.input, searchInput.typed);
+    if (selected > 0) {
+      const searchString = searchInput.typed;
+      setSearchInput((state) => {
+        // wiki uses Title casing. The capitalization of the user needs to be preserved
+        return {
+          ...state,
+          input:
+            searchString +
+            listItems[selected - 1]["props"]["result"].slice(
+              searchString.length
+            ),
+        };
+      });
+    }
+    if (selected === 0) {
+      setSearchInput((state) => {
+        return { ...state, input: state.typed };
+      });
+    }
+  }, [selected]);
+
+  useEffect(() => {
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
+    searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
+
+    return () => {
+      searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
+      searchInput.removeEventListener("keydown", (e) => handleKeyDown(e));
+    };
+  }, []);
+
+  return (
+    <div className={styles.search}>
+      <div className={styles.searchContainer}>
+        <form className={styles.searchBar} onSubmit={handleSumbit}>
+          <SearchIcon />
+          <input
+            type="text"
+            spellCheck="false"
+            id="searchInput"
+            value={searchInput.input}
+            autoComplete="off"
+            aria-label="Search"
+            onChange={(e) =>
+              setSearchInput({ ...searchInput, input: e.target.value })
+            }
+          />
+          <ClearSearchButton />
+        </form>
+      </div>
+      <div className={styles.searchResults}>
+        <hr className={styles.hr}></hr>
+        <SearchResults results={APIresults} />
+      </div>
+    </div>
+  );
 
   function handleKeyUp(e) {
     let searchInputString = e.target.value;
@@ -23,7 +86,7 @@ export default function Search() {
       return setAPIresults([]);
     }
 
-    // Don't update search for non character producing keys. Not sure of the best way to do this
+    // Don't update search for non character producing keys. There's a better way, but I'm not sure
     if (
       e.code.includes("Arrow") ||
       e.code.includes("Meta") ||
@@ -56,14 +119,14 @@ export default function Search() {
     });
 
     // search results are 1-10. Input acts as 0
-    if (e.code == "ArrowDown") {
+    if (e.code === "ArrowDown") {
       setSelected((prevState) => {
         if (prevState < listItemsLength) return prevState + 1;
         else return 0;
       });
     }
 
-    if (e.code == "ArrowUp") {
+    if (e.code === "ArrowUp") {
       e.preventDefault();
       setSelected((prevState) => {
         if (prevState > 0) return prevState - 1;
@@ -72,76 +135,25 @@ export default function Search() {
     }
   }
 
-  // handles the up/down arrow key changing what should be highlighted and updating the input
-  // to match the highlighted search result
-  useEffect(() => {
-    // console.log(selected, searchInput.input, searchInput.typed);
-    if (selected > 0) {
-      const searchString = searchInput.typed;
-      setSearchInput((state) => {
-        // wiki uses Title casing. The capitalization of the user needs to be preserved
-        return {
-          ...state,
-          input:
-            searchString +
-            listItems[selected - 1]["props"]["result"].slice(
-              searchString.length
-            ),
-        };
-      });
-    }
-    if (selected == 0) {
-      setSearchInput((state) => {
-        return { ...state, input: state.typed };
-      });
-    }
-  }, [selected]);
-
-  useEffect(() => {
-    const searchInput = document.getElementById("searchInput");
-
-    searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
-    searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
-
-    return () => {
-      searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
-      searchInput.removeEventListener("keydown", (e) => handleKeyDown(e));
-    };
-  }, []);
-
+  // open wikimedium page on enter key press
   function handleSumbit(e) {
     e.preventDefault();
     let url = window.location.pathname;
-    const extra =
-      selected == 0 ? searchInput.input : APIresults[1][selected - 1];
+    let extra;
+    if (selected === 0) {
+      // if the user word is the same word as first search result, use wikipedia's capitalization
+      if (APIresults[1][0].toLowerCase() === searchInput.input.toLowerCase()) {
+        extra = APIresults[1][0];
+      } else {
+        extra = searchInput.input;
+      }
+    } else {
+      extra = APIresults[1][selected - 1];
+    }
+
     url += extra;
     window.open(url, "_self");
   }
-
-  return (
-    <div className={styles.search}>
-      <div className={styles.searchContainer}>
-        <form className={styles.searchBar} onSubmit={handleSumbit}>
-          <SearchIcon />
-          <input
-            type="text"
-            id="searchInput"
-            value={searchInput.input}
-            autoComplete="off"
-            aria-label="Search"
-            onChange={(e) =>
-              setSearchInput({ ...searchInput, input: e.target.value })
-            }
-          />
-          <ClearSearchButton />
-        </form>
-      </div>
-      <div className={styles.searchResults}>
-        <hr className={styles.hr}></hr>
-        <SearchResults results={APIresults} />
-      </div>
-    </div>
-  );
 
   function SearchResults(props) {
     const results = props?.results[1];
@@ -168,7 +180,7 @@ export default function Search() {
     const [classes, setClasses] = useState(`${styles.searchResult}`);
 
     useEffect(() => {
-      if (selected == id) {
+      if (selected === id) {
         setClasses(`${styles.searchResult} ${styles.active}`);
       }
     }, [selected]);
