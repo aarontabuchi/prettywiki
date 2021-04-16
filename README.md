@@ -62,3 +62,22 @@ Visual
 - Auto-completed/search result suggestions are **bold** with the typed text not bold
 - The typed input capitalization of the user is preserved
 - Search results have search/magnifying glass icon
+
+## Bonus! Google homepage visual bug (is live 4/16)
+While researching the functionality of the Google search bar I found this small visual bug.
+
+1. Go to [Google.com](https://www.google.com) and don't click or type
+2. Press the Up Arrow key on your keyboard
+3. A drop-down list will be displayed, but it is empty.
+
+If you press the Down Arrow key or click on the search area, the drop-down list will show recent searches and/or trending searches.
+
+Only after being loaded for the first time, the Up Arrow key will now show the drop-down list will recent searches and/or trending searches.
+
+The intended behavior should be to show correctly populated drop-down list and not an empty one, or for the Up Arrow key to not display anything.
+
+If you keep typing into the search until there aren't any suggestions (e.g. "ggggg"), the drop-down list will disappear. Pressing the Down Arrow key does not do anything at this point, but pressing the Up Arrow key will bring up the empty drop-down list. The intended behavior for this should be to copy the Down Arrow key and not display anything.
+
+![Google Bug gif](/public/google_search_bug.gif)
+
+I tested and reproduced this on Chrome, Firefox, Safari and on another desktop.
