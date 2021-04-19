@@ -45,18 +45,21 @@ Following a search result takes users to the wiki article, but with the look and
 
 ## Google Search Specifications Replicated:
 Functional
+- Focus is on text input on page load
 - Arrow-key up/down navigation through search results
   - Search input changes with arrow-key navigation
   - Typing refreshes the search
   - Up arrow-key does not move text cursor to the beginning of text input
-- Click on search result
-- Hit enter
+- Click on search result directs to the page
+- Hitting Enter on keyboard will also direct to the page
 - Clear input by clicking the "X" clear button
 
 Visual
-- Box shadow on hover and focus
+- Box shadow appears on hover and focus of the input
+  - but not when there are no search results!
 - Highlight on arrow-key selected search result or on mouse cursor hover
   - Mouse movement overrides arrow-key selection highlight
+  - Using arrow-keys after mouse movement will pick up from where mouse cursor was
 - Clicking outside of search input hides the search results
 - Show "X" clear-input button after type input
 - Auto-completed/search result suggestions are **bold** with the typed text not bold
@@ -79,7 +82,7 @@ Only after being loaded for the first time, the Up Arrow key will now show the d
 
 The intended behavior should be to show correctly populated drop-down list and not an empty one, or for the Up Arrow key to not display anything.
 
-If you keep typing into the search until there aren't any suggestions (e.g. "ggggg"), the drop-down list will disappear. Pressing the Down Arrow key does not do anything at this point, but pressing the Up Arrow key will bring up the empty drop-down list. The intended behavior for this should be to copy the Down Arrow key and not display anything.
+You can also find this bug if you keep typing into the search until there aren't any suggestions (e.g. "ggggg"). Without suggestions, the drop-down list will disappear. Pressing the Down Arrow key does not do anything at this point, but pressing the Up Arrow key will bring up the empty drop-down list. The intended behavior for this should be to copy the Down Arrow key and not display anything.
 
 ![Google Bug gif](/public/google_search_bug.gif)
 
