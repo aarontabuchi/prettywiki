@@ -43,7 +43,7 @@ Following a search result takes users to the wiki article, but with the look and
 
 [Next.js](https://www.nextjs.org) is used for handling the dynamic routing of the search results to their own page.
 
-## Google search specifications replicated:
+## Google Search Specifications Replicated:
 Functional
 - Arrow-key up/down navigation through search results
   - Search input changes with arrow-key navigation
@@ -63,7 +63,10 @@ Visual
 - The typed input capitalization of the user is preserved
 - Search results have search/magnifying glass icon
 
-## Bonus! Google homepage visual bug (is live 4/16)
+## No Search Button
+I didn't add the "Google Search" and "I'm feeling lucky" buttons onto my site because Wikipedia isn't for searching and discovering, but an index of the articles. People go to Wikipedia already knowing what they want (typically they get to Wikipedia from a Google search). Hitting enter on Wikipedia search will take the user directly to the top article (unless what the user typed is ambiguous) and not to search results, so I made mine the same.
+
+## Bonus: Google Homepage Visual Bug (is live Apr 19)
 While researching the functionality of the Google search bar I found this small visual bug.
 
 1. Go to [Google.com](https://www.google.com) and don't click or type
@@ -80,4 +83,4 @@ If you keep typing into the search until there aren't any suggestions (e.g. "ggg
 
 ![Google Bug gif](/public/google_search_bug.gif)
 
-I tested and reproduced this on Chrome, Firefox, Safari and on another desktop.
+I tested and reproduced this on multiple browsers and desktops.
