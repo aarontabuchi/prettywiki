@@ -13,12 +13,14 @@ export default function Search() {
   const [searchInput, setSearchInput] = useState({ input: "", typed: "" });
   const [APIresults, setAPIresults] = useState("");
   const [selected, setSelected] = useState(0);
+  const [selectedVisual, setSelectedVisual] = useState(0);
+  const [classes, setClasses] = useState(`${styles.search}`);
   const listItems = [];
 
   // handles the up/down arrow key changing what should be highlighted and updating the input
   // to match the highlighted search result
   useEffect(() => {
-    // console.log(selected, searchInput.input, searchInput.typed);
+    setSelectedVisual(selected);
     if (selected > 0) {
       const searchString = searchInput.typed;
       setSearchInput((state) => {
@@ -45,6 +47,7 @@ export default function Search() {
 
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
+    searchInput.focus();
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
@@ -52,15 +55,21 @@ export default function Search() {
     };
   }, []);
 
+  useEffect(() => {
+    if (listItems.length > 0) {
+      setClasses(`${styles.search} ${styles.hasResults}`);
+    } else setClasses(styles.search);
+  }, [listItems]);
+
   return (
-    <div className={styles.search}>
+    <div className={classes}>
       <div className={styles.searchContainer}>
         <form className={styles.searchBar} onSubmit={handleSumbit}>
           <SearchIcon />
           <input
             type="text"
-            spellCheck="false"
             id="searchInput"
+            autoFocus
             value={searchInput.input}
             autoComplete="off"
             aria-label="Search"
@@ -113,6 +122,9 @@ export default function Search() {
 
   function handleKeyDown(e) {
     let listItemsLength;
+
+    if (e.code === "Escape") setSelected(0);
+
     setAPIresults((state) => {
       listItemsLength = state["1"]?.length;
       return { ...state };
@@ -120,17 +132,27 @@ export default function Search() {
 
     // search results are 1-10. Input acts as 0
     if (e.code === "ArrowDown") {
-      setSelected((prevState) => {
-        if (prevState < listItemsLength) return prevState + 1;
-        else return 0;
+      setSelectedVisual((state) => {
+        if (state < listItemsLength) {
+          setSelected(state + 1);
+          return state + 1;
+        } else {
+          setSelected(0);
+          return 0;
+        }
       });
     }
 
     if (e.code === "ArrowUp") {
       e.preventDefault();
-      setSelected((prevState) => {
-        if (prevState > 0) return prevState - 1;
-        else return listItemsLength;
+      setSelectedVisual((state) => {
+        if (state > 0) {
+          setSelected(state - 1);
+          return state - 1;
+        } else {
+          setSelected(listItemsLength);
+          return listItemsLength;
+        }
       });
     }
   }
@@ -180,22 +202,26 @@ export default function Search() {
     const [classes, setClasses] = useState(`${styles.searchResult}`);
 
     useEffect(() => {
-      if (selected === id) {
+      if (selectedVisual === id) {
         setClasses(`${styles.searchResult} ${styles.active}`);
+      } else {
+        setClasses(`${styles.searchResult}`);
       }
-    }, [selected]);
+    }, [selectedVisual]);
 
     // pointer disappears while typing but still triggers mouseover and mouseenter
     // so that arrow key nav doesn't work, but mousemove solves that
     useEffect(() => {
-      const item = document.getElementById("searchResults");
-      item.addEventListener("mousemove", () => setClasses(styles.searchResult));
+      const item = document.getElementById(id);
+      item.addEventListener("mousemove", handleMouseMove);
       return () => {
-        item.removeEventListener("mousemove", () =>
-          setClasses(styles.searchResult)
-        );
+        item.removeEventListener("mousemove", handleMouseMove);
       };
     }, []);
+
+    function handleMouseMove() {
+      setSelectedVisual(id);
+    }
 
     return (
       <Link href={`/${result}`}>

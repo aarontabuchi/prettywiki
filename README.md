@@ -48,7 +48,7 @@ Functional
 - Arrow-key up/down navigation through search results
   - Search input changes with arrow-key navigation
   - Typing refreshes the search
-  - Up arrow-key does not move cursor to beginning of text input
+  - Up arrow-key does not move text cursor to the beginning of text input
 - Click on search result
 - Hit enter
 - Clear input by clicking the "X" clear button
