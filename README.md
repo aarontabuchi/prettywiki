@@ -1,6 +1,6 @@
 # [PrettyWiki](https://www.prettywiki.netlify.app)
 
-Wikipedia, but easy to read!
+Wikipedia, but easier to read!
 ### [See it live here!](https://www.prettywiki.netlify.app)
 
 ## Problem
@@ -17,7 +17,7 @@ Problems with wide text:
   
 - Tiring for the eyes, as they have to move a long distance or require turning the head
   
-- Is more difficult to return to the next line of text
+- Is more difficult to continue reading on the next line of text
 
 ## Solution
 
@@ -27,7 +27,9 @@ The ideal text length is [reportedly 45 to 75 characters](https://www.smashingma
 
 Setting a max-width for articles creates a much better user experience.
 
-` /* Fun fact: CSS has a 'ch' unit that represents the width of the font's character "0", presumably to solve the above problem. */ `
+```css
+/* Fun fact: CSS has a 'ch' unit that represents the width of the font's character "0", presumably to solve the above problem. I set the article pages to have a max-width of 70ch */
+```
 
 ![PrettyWiki demo gif](/public/prettywiki_demo.gif)
 
