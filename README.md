@@ -71,7 +71,7 @@ Visual
 ## No Search Button
 I didn't add the "Google Search" and "I'm feeling lucky" buttons onto my site because Wikipedia isn't for searching and discovering, but an index of the articles. People go to Wikipedia already knowing what they want (typically they get to Wikipedia from a Google search). Hitting enter on Wikipedia search will take the user directly to the top article (unless what the user typed is ambiguous) and not to search results, so I made mine the same.
 
-## Bonus: Google Homepage Visual Bug (is live Apr 19)
+## Bonus: Google Homepage Visual Bug (is live Apr 30)
 While researching the functionality of the Google search bar I found this small visual bug.
 
 1. Go to [Google.com](https://www.google.com) and don't click or type
@@ -88,4 +88,9 @@ You can also find this bug if you keep typing into the search until there aren't
 
 ![Google Bug gif](/public/google_search_bug.gif)
 
-I tested and reproduced this on multiple browsers and desktops.
+### Bonus Bonus!
+This bug is also present in the search of Google Images and Shopping. The Up Arrow on News, Videos, Maps etc. just returns the cursor to the start of the text like a normal text input element.
+
+![Images Search bug](/public/images_search_bug.png)
+
+![Shopping Search bug](/public/shopping_search_bug.png)
