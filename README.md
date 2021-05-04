@@ -3,6 +3,16 @@
 Wikipedia, but easier to read!
 ### [Try it here!](https://www.prettywiki.netlify.app)
 
+## Table of Contents
+- [Problem](https://github.com/aarontabuchi/prettywiki#problem)
+- [Solution](https://github.com/aarontabuchi/prettywiki#solution)
+- [Project and Technologies](https://github.com/aarontabuchi/prettywiki#project-and-technologies)
+- [Demo](https://github.com/aarontabuchi/prettywiki#demo)
+- [Google Search Specifications Replicated](https://github.com/aarontabuchi/prettywiki#google-search-specifications-replicated)
+- [Learnings](https://github.com/aarontabuchi/prettywiki#learnings)
+- [Design Decisions](https://github.com/aarontabuchi/prettywiki#design-decisions)
+- [Bonus: Google Homepage Visual Bug](https://github.com/aarontabuchi/prettywiki#bonus-google-homepage-visual-bug)
+
 ## Problem
 
 If you've used wikipedia on a large screen, you've seen something like this:
@@ -31,11 +41,6 @@ Setting a max-width for articles creates a much better user experience.
 /* Fun fact: CSS has a 'ch' unit that represents the width of the font's character "0", presumably to solve the above problem. I set the article pages to have a max-width of 70ch */
 ```
 
-## Demo
-![PrettyWiki demo gif](/public/prettywiki_demo.gif)
-
-### [Try it here!](https://www.prettywiki.netlify.app)
-
 ## Project and Technologies
 
 [PrettyWiki](https://www.prettywiki.netlify.app) uses a [Google](https://www.google.com) styled and Google functional search page to fetch [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) search results.
@@ -45,6 +50,11 @@ Following a search result takes users to the wiki article, but with the look and
 [React](https://www.reactjs.org) is used for fast, reusable compenents.
 
 [Next.js](https://www.nextjs.org) is used for handling the dynamic routing of the search results to their own page.
+
+## Demo
+![PrettyWiki demo gif](/public/prettywiki_demo.gif)
+
+### [Try it here!](https://www.prettywiki.netlify.app)
 
 ## Google Search Specifications Replicated:
 Functional
@@ -84,8 +94,13 @@ I also learned first-hand how bad design and practices leads to spagetti code an
 
 Test driven development would have also helped me think about the design and state-management more, without having to break something with each function I added.
 
-## No Search Buttons
+## Design Decisions
+### No Search Buttons
 I didn't add the "Google Search" and "I'm feeling lucky" buttons onto my site because Wikipedia isn't for searching and discovering, but an index of the articles. People go to Wikipedia already knowing what they want (typically they get to Wikipedia from a Google search). Hitting enter on Wikipedia search will take the user directly to the top article (unless what the user typed is ambiguous) and not to search results, so I made mine the same.
+
+### No Search Bar on Article Page
+I didn't add the search bar because Medium doesn't have one unless you are signed in to Medium. The style is very minimalistic and just a logo and search bar didn't look very good at the top of the page without other elements like "Sign in"/Profile and other navigation.
+However, the search bar on the homepage is a stand alone React component so it is readily available to be reused in other places.
 
 ## Bonus: Google Homepage Visual Bug
 While researching the functionality of the Google search bar I found this small visual bug.
