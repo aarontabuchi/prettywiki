@@ -16,6 +16,7 @@ export default function Home() {
           <Search />
         </div>
       </main>
+      <footer id="footer" tabindex="0"></footer>
     </>
   );
 }

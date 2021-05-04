@@ -43,13 +43,16 @@ export default function Search() {
   }, [selected]);
 
   useEffect(() => {
-    if (window.innerWidth < 600) return;
+    if (window.innerWidth < 600) {
+      document.getElementById("footer").focus();
+      return;
+    }
     const searchInput = document.getElementById("searchInput");
 
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
     searchInput.focus();
-    console.log(window.innerWidth)
+    console.log(window.innerWidth);
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
