@@ -47,7 +47,10 @@ export default function Search() {
 
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
-    searchInput.focus();
+    if (window.innerWidth > 600) {
+      searchInput.focus();
+      console.log("greater than 600")
+    }
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));

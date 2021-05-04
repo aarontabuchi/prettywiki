@@ -37,7 +37,6 @@ export default function Post() {
         <link rel="icon" href="/PW.ico" />
         <meta name="Description" content="Read Wikipedia articles styled attractively"></meta>
       </Head>
-      <header></header>
       <main className={styles.container}>
         <h1>{pid}</h1>
         <div className={styles.imgWrapper}>

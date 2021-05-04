@@ -6,6 +6,7 @@
 
 main.container {
   font-family: "Lora", serif;
+  overflow-x: hidden;
 }
 
 /*
