@@ -1,7 +1,7 @@
-# [PrettyWiki](https://www.prettywiki.netlify.app)
+![PrettyWiki](/public/logo.svg)
 
 Wikipedia, but easier to read!
-### [See it live here!](https://www.prettywiki.netlify.app)
+### [Try it here!](https://www.prettywiki.netlify.app)
 
 ## Problem
 
@@ -31,9 +31,10 @@ Setting a max-width for articles creates a much better user experience.
 /* Fun fact: CSS has a 'ch' unit that represents the width of the font's character "0", presumably to solve the above problem. I set the article pages to have a max-width of 70ch */
 ```
 
+## Demo
 ![PrettyWiki demo gif](/public/prettywiki_demo.gif)
 
-### [See it live here!](https://www.prettywiki.netlify.app)
+### [Try it here!](https://www.prettywiki.netlify.app)
 
 ## Project and Technologies
 
@@ -69,7 +70,7 @@ Visual
 - Search results have search/magnifying glass icon
 
 ## Learnings
-### Project scope and planning
+### Project Scope and Planning
 This project really taught me the importance of project scoping and planning. My initial plan was to just make the Wiki article page look like Medium and to have a Google styled search page. Only later on did I decide to copy all the functionality of Google search, and I was adding each function in piecewise, instead of considering how they would integrate together.
 
 I wanted the arrow keys to work with the search results, so I added that function in after I already had a CSS hover state added to show which search result was hovered by the mouse cursor. This caused a visual bug that if a user selected a search result with the arrow keys and then moved the mouse cursor over a different search result, it would show the two different search results in the selected/hover state. To fix this I needed to have both the mouse and the arrow keys control the same "selected" state so that there would never appear to be two search results selected at the same time.
@@ -78,11 +79,12 @@ Fixing that issue caused a different bug. I was using the "selected" state to up
 
 These multiple issues could have been avoided by properly scoping the project from the beginning, and also teaches me how a client (me, in this case), adding on additional requirements or deliverables during development can greatly delay the process.
 
+### Programming Principles
 I also learned first-hand how bad design and practices leads to spagetti code and bugs. I believe the above problems highlight not following the *separation of concerns principle* of separating the visual and data content, as well as the *single-responsibility principle* of one function being responsible for one functionality.
 
 Test driven development would have also helped me think about the design and state-management more, without having to break something with each function I added.
 
-## No Search Button
+## No Search Buttons
 I didn't add the "Google Search" and "I'm feeling lucky" buttons onto my site because Wikipedia isn't for searching and discovering, but an index of the articles. People go to Wikipedia already knowing what they want (typically they get to Wikipedia from a Google search). Hitting enter on Wikipedia search will take the user directly to the top article (unless what the user typed is ambiguous) and not to search results, so I made mine the same.
 
 ## Bonus: Google Homepage Visual Bug
