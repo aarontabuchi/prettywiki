@@ -52,7 +52,6 @@ export default function Search() {
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
     searchInput.focus();
-    console.log(window.innerWidth);
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
