@@ -43,16 +43,17 @@ export default function Search() {
   }, [selected]);
 
   useEffect(() => {
+    const searchInput = document.getElementById("searchInput");
+    
+    searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
+    searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
+    searchInput.focus();
+    
     if (window.innerWidth < 600) {
       document.getElementById("footer").focus();
       return;
     }
-    const searchInput = document.getElementById("searchInput");
-
-    searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
-    searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
-    searchInput.focus();
-
+    
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
       searchInput.removeEventListener("keydown", (e) => handleKeyDown(e));
