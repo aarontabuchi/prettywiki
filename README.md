@@ -1,7 +1,6 @@
 ![PrettyWiki](/public/logo.svg)
 
-Wikipedia, but easier to read!
-### [Try it here!](https://www.prettywiki.netlify.app)
+### Wikipedia, but easier to read! [Try it here!](https://www.prettywiki.netlify.app)
 
 ## Table of Contents
 - [Problem](https://github.com/aarontabuchi/prettywiki#problem)
@@ -57,7 +56,7 @@ Following a search result takes users to the wiki article, but with the look and
 ### [Try it here!](https://www.prettywiki.netlify.app)
 
 ## Google Search Specifications Replicated:
-Functional
+### Functional
 - Focus is on text input on page load
 - Arrow-key up/down navigation through search results
   - Search input changes with arrow-key navigation
@@ -67,7 +66,7 @@ Functional
 - Hitting Enter on keyboard will also direct to the page
 - Clear input by clicking the "X" clear button
 
-Visual
+### Visual
 - Box shadow appears on hover and focus of the input
   - but not when there are no search results!
 - Highlight on arrow-key selected search result or on mouse cursor hover
