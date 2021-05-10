@@ -47,7 +47,6 @@ export default function Search() {
     
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
-    searchInput.focus();
     
     if (window.innerWidth < 600) {
       searchInput.blur();

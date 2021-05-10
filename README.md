@@ -79,15 +79,15 @@ Following a search result takes users to the wiki article, but with the look and
 - Search results have search/magnifying glass icon
 - On mobile:
   - Search input is not in focus on page load
-  - Clicking into search input makes the search go full screen, hiding the logo to make room for the on-screen keyboard
+  - Clicking into search input makes the search go full screen (hides the logo to make room for the on-screen keyboard)
 
 ## Learnings
 ### Project Scope and Planning
 This project really taught me the importance of project scoping and planning. My initial plan was to just make the Wiki article page look like Medium and to have a Google styled search page. Only later on did I decide to copy all the functionality of Google search, and I was adding each function in piecewise, instead of considering how they would integrate together.
 
-I wanted the arrow keys to work with the search results, so I added that function in after I already had a CSS hover state added to show which search result was hovered by the mouse cursor. This caused a visual bug that if a user selected a search result with the arrow keys and then moved the mouse cursor over a different search result, it would show the two different search results in the selected/hover state. To fix this I needed to have both the mouse and the arrow keys control the same "selected" state so that there would never appear to be two search results selected at the same time.
+I wanted the arrow-keys to work with the search results, so I added that function in after I already had a CSS hover state added to show which search result was hovered by the mouse cursor. This caused a visual bug that if a user selected a search result with the arrow-keys and then moved the mouse cursor over a different search result, it would show the two different search results in the selected/hover state. To fix this I needed to have both the mouse and the arrow-keys control the same "selected" state so that there would never appear to be two search results selected at the same time.
 
-Fixing that issue caused a different bug. I was using the "selected" state to update the search input, but it should update for the arrow keys and not for the mouse cursor (because that is how Google does it (and it is a better user experience), otherwise I would have just left it). To fix this I needed to have a separate state for just the arrow keys, and another state for visually updating the selected search result.
+Fixing that issue caused a different bug. I was using the "selected" state to update the search input, but it should update for the arrow-keys and not for the mouse cursor (because that is how Google does it (and it is a better user experience), otherwise I would have just left it). To fix this I needed to have a separate state for just the arrow-keys, and another state for visually updating the selected search result.
 
 These multiple issues could have been avoided by properly scoping the project from the beginning, and also teaches me how a client (me, in this case), adding on additional requirements or deliverables during development can greatly delay the process.
 
@@ -108,21 +108,21 @@ However, the search bar on the homepage is a stand alone React component so it i
 While researching the functionality of the Google search bar I found this small visual bug.
 
 1. Go to [Google.com](https://www.google.com) and don't click or type
-2. Press the Up Arrow key on your keyboard
-3. A drop-down list will be displayed, but it is empty.
+2. Press the ArrowUp-key on your keyboard
+3. A drop-down list will be displayed, but it is empty
 
-If you press the Down Arrow key or click on the search area, the drop-down list will show recent searches and/or trending searches.
+If you press the ArrowDown-key or click on the search area, the drop-down list will show recent searches and/or trending searches.
 
-Only after being loaded for the first time, the Up Arrow key will now show the drop-down list will recent searches and/or trending searches.
+Only after being loaded for the first time, the ArrowUp-key will now show the drop-down list will recent searches and/or trending searches.
 
-The intended behavior should be to show correctly populated drop-down list and not an empty one, or for the Up Arrow key to not display anything.
+The intended behavior should be to show correctly populated drop-down list and not an empty one, or for the ArrowUp-key to not display anything.
 
-You can also find this bug if you keep typing into the search until there aren't any suggestions (e.g. "ggggg"). Without suggestions, the drop-down list will disappear. Pressing the Down Arrow key does not do anything at this point, but pressing the Up Arrow key will bring up the empty drop-down list. The intended behavior for this should be to copy the Down Arrow key and not display anything.
+You can also find this bug if you keep typing into the search until there aren't any suggestions (e.g. "ggggg"). Without suggestions, the drop-down list will disappear. Pressing the ArrowDown-key does not do anything at this point, but pressing the ArrowUp-key will bring up the empty drop-down list. The intended behavior for this should be to copy the ArrowDown-key and not display anything.
 
 ![Google Bug gif](/public/google_search_bug.gif)
 
 ### Bonus Bonus!
-This bug is also present in the search of Google Images and Shopping. The Up Arrow on News, Videos, Maps etc. just returns the cursor to the start of the text like a normal text input element.
+This bug is also present in the search of Google Images and Shopping. The ArrowUp-key on News, Videos, Maps etc. just returns the cursor to the start of the text like a normal text input element.
 
 ![Images Search bug](/public/images_search_bug.png)
 
