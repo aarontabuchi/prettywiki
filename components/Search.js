@@ -49,13 +49,8 @@ export default function Search() {
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
     searchInput.focus();
     
-    // hack so that on mobile, the search doesn't have focus because focus causes
-    // search to go full screen. On Safari, not setting focus still focused the
-    // search input for some reason. Would have to research more.
-    
     if (window.innerWidth < 600) {
-      document.getElementById("footer").focus();
-      return;
+      searchInput.blur();
     }
     
     return () => {

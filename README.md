@@ -77,6 +77,9 @@ Following a search result takes users to the wiki article, but with the look and
 - Auto-completed/search result suggestions are **bold** with the typed text not bold
 - The typed input capitalization of the user is preserved
 - Search results have search/magnifying glass icon
+- On mobile:
+  - Search input is not in focus on page load
+  - Clicking into search input makes the search go full screen, hiding the logo to make room for the on-screen keyboard
 
 ## Learnings
 ### Project Scope and Planning
