@@ -15,6 +15,7 @@ export default function Search() {
   const [selected, setSelected] = useState(0);
   const [selectedVisual, setSelectedVisual] = useState(0);
   const [classes, setClasses] = useState(`${styles.search}`);
+  const [isEscaped, setIsEscaped] = useState(false);
   const listItems = [];
 
   // handles the up/down arrow key changing what should be highlighted and updating the input
@@ -44,14 +45,17 @@ export default function Search() {
 
   useEffect(() => {
     const searchInput = document.getElementById("searchInput");
-    
+
     searchInput.addEventListener("keyup", (e) => handleKeyUp(e));
     searchInput.addEventListener("keydown", (e) => handleKeyDown(e));
-    
+    searchInput.addEventListener("click", () => {
+      setIsEscaped(false);
+    });
+
     if (window.innerWidth < 600) {
       searchInput.blur();
     }
-    
+
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
       searchInput.removeEventListener("keydown", (e) => handleKeyDown(e));
@@ -65,7 +69,7 @@ export default function Search() {
   }, [listItems]);
 
   return (
-    <div className={classes}>
+    <div className={`${classes} ${isEscaped ? styles.escaped : ""}`}>
       <div className={styles.searchContainer}>
         <form className={styles.searchBar} onSubmit={handleSumbit}>
           <SearchIcon />
@@ -125,8 +129,25 @@ export default function Search() {
 
   function handleKeyDown(e) {
     let listItemsLength;
+    let returnEarly = false;
 
-    if (e.code === "Escape") setSelected(0);
+    if (e.code === "Escape") {
+      setSelected(0);
+      setIsEscaped(true);
+      return;
+    }
+
+    if (e.code === "ArrowLeft" || e.code === "ArrowRight") return;
+
+    setIsEscaped((state) => {
+      if (state === true) {
+        returnEarly = true;
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    if (returnEarly === true) return;
 
     setAPIresults((state) => {
       listItemsLength = state["1"]?.length;

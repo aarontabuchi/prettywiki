@@ -58,13 +58,16 @@ Following a search result takes users to the wiki article, but with the look and
 ## Google Search Specifications Replicated:
 ### Functional
 - Focus is on text input on page load
-- Arrow-key up/down navigation through search results
+- ArrowUp/Down keys navigate through search results
   - Search input changes with arrow-key navigation
   - Typing refreshes the search
-  - Up arrow-key does not move text cursor to the beginning of text input
+  - ArrowUp key does not move text cursor to the beginning of text input
 - Click on search result directs to the page
 - Hitting Enter on keyboard will also direct to the page
 - Clear input by clicking the "X" clear button
+- Escape key hides the search results and removes auto-completed text from the input
+  - Clicking on the input or pressing the ArrowUp/ArrowDown key will redisplay the search results without changing the selection
+  - The ArrowLeft/ArrowRight keys move the text cursor without affecting the search results display
 
 ### Visual
 - Box shadow appears on hover and focus of the input
