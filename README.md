@@ -14,7 +14,7 @@
 
 ## Problem
 
-If you've used wikipedia on a large screen, you've seen something like this:
+If you've used Wikipedia on a large screen, you've seen something like this:
 
 ![Wikipedia screenshot](/public/wikipedia_screenshot.png)
 
@@ -44,7 +44,7 @@ Setting a max-width for articles creates a much better user experience.
 
 [PrettyWiki](https://www.prettywiki.netlify.app) uses a [Google](https://www.google.com) styled and Google functional search page to fetch [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) search results.
 
-Following a search result takes users to the wiki article, but with the look and feel of [Medium](https://www.medium.com), a popular online publishing platform.
+Following a search result takes users to the Wiki article, but with the look and feel of [Medium](https://www.medium.com), a popular online publishing platform.
 
 [React](https://www.reactjs.org) is used for fast, reusable compenents.
 

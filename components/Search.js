@@ -54,7 +54,7 @@ export default function Search() {
 
     if (window.innerWidth < 600) {
       searchInput.blur();
-    }
+    } else searchInput.focus();
 
     return () => {
       searchInput.removeEventListener("keyup", (e) => handleKeyUp(e));
@@ -76,7 +76,6 @@ export default function Search() {
           <input
             type="text"
             id="searchInput"
-            autoFocus
             value={searchInput.input}
             autoComplete="off"
             aria-label="Search"
