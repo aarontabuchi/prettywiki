@@ -183,7 +183,7 @@ export default function Search() {
   // open wikimedium page on enter key press
   function handleSumbit(e) {
     e.preventDefault();
-    let url = window.location.pathname;
+    let url = "/";
     let extra;
     if (selected === 0) {
       // if the user word is the same word as first search result, use wikipedia's capitalization

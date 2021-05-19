@@ -1,7 +1,12 @@
+.displayNone {
+  display: none;
+}
+
 .container {
   color: #292929;
   max-width: 70ch;
   margin: 8px auto;
+  display: block;
 }
 
 main.container {
@@ -97,6 +102,16 @@ Headings 27 (16px)
 .container li {
   margin-top: 16px;
   font-size: 20px;
+}
+
+.pageNotFound {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: -32px;
+}
+
+.pageNotFound .italic {
+  font-style: italic;
 }
 
 @media only screen and (max-width: 700px) {
