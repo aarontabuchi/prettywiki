@@ -69,7 +69,10 @@ export default function Search() {
   }, [listItems]);
 
   return (
-    <div className={`${classes} ${isEscaped ? styles.escaped : ""}`}>
+    <div
+      id="search"
+      className={`${classes} ${isEscaped ? styles.escaped : ""}`}
+    >
       <div className={styles.searchContainer}>
         <form className={styles.searchBar} onSubmit={handleSumbit}>
           <SearchIcon />
@@ -269,6 +272,8 @@ export default function Search() {
     function handleOnClick() {
       setSearchInput({ input: "", typed: "" });
       setAPIresults([]);
+      setSelected(0);
+      document.getElementById("searchInput").focus();
     }
 
     useEffect(() => {
@@ -278,7 +283,7 @@ export default function Search() {
     }, [searchInput]);
 
     return (
-      <div className={classes} onClick={handleOnClick}>
+      <div id="clearSearch" className={classes} onClick={handleOnClick}>
         <ClearIcon />
       </div>
     );
