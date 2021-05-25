@@ -84,6 +84,9 @@ Following a search result takes users to the Wiki article, but with the look and
   - Search input is not in focus on page load
   - Clicking into search input makes the search go full screen (hides the logo to make room for the on-screen keyboard)
 
+## Complete End-to-End test coverage with Cypress
+![PrettyWiki complete e2e test coverage](/public/completeTestCoverage.gif)
+
 ## Learnings
 ### Project Scope and Planning
 This project really taught me the importance of project scoping and planning. My initial plan was to just make the Wiki article page look like Medium and to have a Google styled search page. Only later on did I decide to copy all the functionality of Google search, and I was adding each function in piecewise, instead of considering how they would integrate together.
@@ -103,7 +106,7 @@ Test driven development would have also helped me think about the design and sta
 After completing this project, I decided to come back and practice adding tests. I used Cypress to get *nearly* complete end-to-end and functional testing of my entire app. The one specification that Cypress couldn't test is the CSS psuedo hover states: [6 year old feature request](https://github.com/cypress-io/cypress/issues/10), so still 100% test coverage with what Cypress can accomplish.
 
 #### Flaw in my testing
-I used snapshots for the visual testing of the mouseover/hover highlight interaction. This works, except in the edge case that the most popular search results for the search string used in my test are changed, and then the test will give a false-positive fail, due to the snapshot differing, but the highlight interaction actually is ok.
+I used snapshots for the visual testing of the mousemove highlight interaction. This works, except in the edge case that the most popular search results for the search string used in my test are changed, and then the test will give a false-positive fail, due to the snapshot differing, but the highlight interaction actually is ok.
 
 To fix this it looks like I would need to stub my fetch request with fake results so that the search results don't change. I'm not sure how I'd implement this in my own app right now, because the fetch is called from the keyup event and sets the fetch results using React state method.
 
