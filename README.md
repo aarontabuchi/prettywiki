@@ -99,6 +99,14 @@ I also learned first-hand how bad design and practices leads to spagetti code an
 
 Test driven development would have also helped me think about the design and state-management more, without having to break something with each function I added.
 
+### Testing
+After completing this project, I decided to come back and practice adding tests. I used Cypress to get *nearly* complete end-to-end and functional testing of my entire app. The one specification that Cypress couldn't test is the CSS psuedo hover states: [6 year old feature request](https://github.com/cypress-io/cypress/issues/10), so still 100% test coverage with what Cypress can accomplish.
+
+#### Flaw in my testing
+I used snapshots for the visual testing of the mouseover/hover highlight interaction. This works, except in the edge case that the most popular search results for the search string used in my test are changed, and then the test will give a false-positive fail, due to the snapshot differing, but the highlight interaction actually is ok.
+
+To fix this it looks like I would need to stub my fetch request with fake results so that the search results don't change. I'm not sure how I'd implement this in my own app right now, because the fetch is called from the keyup event and sets the fetch results using React state method.
+
 ## Design Decisions
 ### No Search Buttons
 I didn't add the "Google Search" and "I'm feeling lucky" buttons onto my site because Wikipedia isn't for searching and discovering, but an index of the articles. People go to Wikipedia already knowing what they want (typically they get to Wikipedia from a Google search). Hitting enter on Wikipedia search will take the user directly to the top article (unless what the user typed is ambiguous) and not to search results, so I made mine the same.
