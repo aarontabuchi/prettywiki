@@ -1,5 +1,24 @@
 /// <reference types="cypress" />
 
+describe(
+  'Mobile specs',
+  {
+    viewportHeight: 823,
+    viewportWidth: 411,
+  },
+  () => {
+    it('Input is not auto-focused', () => {
+      cy.visit("/");
+      cy.get("#search").toMatchImageSnapshot();
+    })
+
+    it('Clicking on input goes fullscreen / hides logo', () => {
+      cy.get('#searchInput').click();
+      cy.get('img').should("not.be.visible");
+    })
+  }
+)
+
 context("Search functions", () => {
   it("Input is auto focused", () => {
     cy.visit("/");
@@ -15,7 +34,7 @@ context("Search functions", () => {
   // });
 
   it("Displays search results on input", () => {
-    cy.get("#search").type("go");
+    cy.get("#search").type("co");
     cy.get("#searchResults");
   });
 
@@ -24,9 +43,9 @@ context("Search functions", () => {
   });
 
   it("User input text-casing is preserved", () => {
-    cy.get("#searchInput").type("O");
-    cy.get("#searchInput").should("have.attr", "value", "goO");
-    cy.get("#search").contains("goOgle");
+    cy.get("#searchInput").type("M");
+    cy.get("#searchInput").should("have.attr", "value", "coM");
+    cy.get("#search").contains("coMputer");
   });
 
   it("Search results are bold and have magnifying glass icon", () => {
@@ -60,32 +79,71 @@ context("Search functions", () => {
   it("Left/right arrow keys should not cause search results to show", () => {
     cy.get("#searchInput")
       .as("searchInput")
-      .type("gog{esc}");
+      .type("comu{esc}");
     cy.get("@searchInput").type("{leftarrow}");
     cy.get("#searchResults")
       .as("searchResults")
       .should("not.be.visible");
-    cy.focused().type("o{rightarrow}");
-    cy.get("@searchResults").contains("Chrome");
+    cy.focused().type("p{rightarrow}");
+    cy.get("@searchResults").contains("program");
+  });
+
+  it("Clicking outside of search should hide search results", () => {
+    cy.get("img").click();
+    cy.get("#searchResults").should("not.be.visible");
+  });
+
+  it("Clicking in search input should show search results", () => {
+    cy.get("#searchInput").click();
+    cy.get("#searchResults").should("be.visible");
+  });
+
+  it("Mouseover changes selection highlight", () => {
+    cy.get("#1")
+      .parent()
+      .trigger("mousemove", { clientY: 2 });
+    cy.get("#search").toMatchImageSnapshot();
+  });
+
+  it("Up/down arrow key changes selection from where mouseover is", () => {
+    cy.get("#searchInput").type("{downarrow}");
+    cy.get("#searchInput").should("have.attr", "value", "computer");
+  });
+
+  it("Up/down arrow key should display search results (if closed by escape) without moving selection", () => {
+    cy.get("#searchInput").type("{esc}");
+    cy.get("#searchResults").should("not.be.visible");
+    cy.get("#search").type("{uparrow}");
+    cy.get("#searchResults").should("be.visible");
+    cy.get("#searchInput").should("have.attr", "value", "compu");
+    cy.get("#searchInput").type("{esc}");
+    cy.get("#search").type("{downarrow}");
+    cy.get("#searchResults").should("be.visible");
+    cy.get("#searchInput").should("have.attr", "value", "compu");
+  });
+
+  it("Up/down arrow key should change search result selection and update search input to match selection without moving cursor", () => {
+    cy.get("#searchInput").type("{downarrow}{downarrow}{downarrow}");
+    cy.get("#searchInput").should("have.attr", "value", "computer science");
+    cy.get("#searchInput").type("{uparrow}");
+    cy.get("#searchInput").should("have.attr", "value", "computer");
+    cy.get("#searchInput").type(" ");
+    cy.get("#searchResults").contains("science");
+  });
+
+  it("Go to article by hitting enter", () => {
+    cy.get("#searchInput").type("{enter}");
+    cy.contains("web browser");
+  });
+
+  it("Go to article by clicking on search result", () => {
+    cy.visit("/");
+    cy.focused().type("compu");
+    cy.get("#1")
+      .parent()
+      .click();
   });
 });
-
-// describe(
-//   'Mobile specs are working',
-//   {
-//     viewportHeight: 1000,
-//     viewportWidth: 400,
-//   },
-//   () => {
-//     it('does not display sidebar', () => {
-//       cy.get('#sidebar').should('not.be.visible')
-//     })
-
-//     it('shows hamburger menu', () => {
-//       cy.get('#header').find('i.menu').should('be.visible')
-//     })
-//   }
-// )
 
 /* 
 Tests (functional and visual)
@@ -100,20 +158,19 @@ V search result suggestions are bold
 V search results have magnifying glass
 F click on X clear button clears input
 V - Clicking outside of search hides the search results
-
 F Arrow key search result navigation updates input value
 F ArrowUp does not move cursor
   V changes highlight
   F changes input value
-V highlight on search result hover
-  V mouse hover overrides the arrowkey hover so that there is only 1 highlight at a time
-  V using arrowUp/Down will continue from where mouse cursor was
-
 F ESC key hides search results and removes auto-completed text
   F clicking in input will redisplay the search results
   F hitting the arrowUP/down key will redisplay the search results
   F ArrowLeft/Right move text cursor without affecting search results
-  
+
+V highlight on search result hover
+  V mouse hover overrides the arrowkey hover so that there is only 1 highlight at a time
+  V using arrowUp/Down will continue from where mouse cursor was
+
 F Click on search result to go to article
 F Use Enter to go to article
 
