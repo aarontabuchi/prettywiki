@@ -111,10 +111,13 @@ export default function Search() {
       e.code.includes("Control") ||
       e.code.includes("Shift") ||
       e.code.includes("Context") ||
-      e.code.includes("Alt")
+      e.code.includes("Alt") ||
+      e.code.includes("Esc")
     ) {
       return;
     }
+
+    setIsEscaped(false);
 
     setSearchInput((state) => {
       return { ...state, typed: searchInputString };
@@ -130,56 +133,57 @@ export default function Search() {
   }
 
   function handleKeyDown(e) {
-    let listItemsLength;
-    let returnEarly = false;
-
+    
     if (e.code === "Escape") {
       setSelected(0);
       setIsEscaped(true);
       return;
     }
+    
+    let listItemsLength;
+    let returnEarly = false;
 
-    if (e.code === "ArrowLeft" || e.code === "ArrowRight") return;
-
-    setIsEscaped((state) => {
-      if (state === true) {
-        returnEarly = true;
-        e.preventDefault();
-        return false;
+    if(e.code === "ArrowDown" || e.code === "ArrowUp") {
+      setIsEscaped((state) => {
+        if (state === true) {
+          returnEarly = true;
+          e.preventDefault();
+          return false;
+        }
+      });
+  
+      if (returnEarly === true) return;
+  
+      setAPIresults((state) => {
+        listItemsLength = state["1"]?.length;
+        return { ...state };
+      });
+  
+      // search results are 1-10. Input acts as 0
+      if (e.code === "ArrowDown") {
+        setSelectedVisual((state) => {
+          if (state < listItemsLength) {
+            setSelected(state + 1);
+            return state + 1;
+          } else {
+            setSelected(0);
+            return 0;
+          }
+        });
       }
-    });
-
-    if (returnEarly === true) return;
-
-    setAPIresults((state) => {
-      listItemsLength = state["1"]?.length;
-      return { ...state };
-    });
-
-    // search results are 1-10. Input acts as 0
-    if (e.code === "ArrowDown") {
-      setSelectedVisual((state) => {
-        if (state < listItemsLength) {
-          setSelected(state + 1);
-          return state + 1;
-        } else {
-          setSelected(0);
-          return 0;
-        }
-      });
-    }
-
-    if (e.code === "ArrowUp") {
-      e.preventDefault();
-      setSelectedVisual((state) => {
-        if (state > 0) {
-          setSelected(state - 1);
-          return state - 1;
-        } else {
-          setSelected(listItemsLength);
-          return listItemsLength;
-        }
-      });
+  
+      if (e.code === "ArrowUp") {
+        e.preventDefault();
+        setSelectedVisual((state) => {
+          if (state > 0) {
+            setSelected(state - 1);
+            return state - 1;
+          } else {
+            setSelected(listItemsLength);
+            return listItemsLength;
+          }
+        });
+      }
     }
   }
 
